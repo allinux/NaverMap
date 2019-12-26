@@ -1,19 +1,26 @@
 package com.jinasoft.navermap;
 
 
-import android.app.Application;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.naver.maps.map.NaverMapSdk;
 
-public class MainActivity extends Application {
+public class MainActivity extends AppCompatActivity {
 
-    public class YourApplication extends Application {
         @Override
-        public void onCreate() {
-            super.onCreate();
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+
             NaverMapSdk.getInstance(this).setClient(
-                    new NaverMapSdk.NaverCloudPlatformClient("npvl4yeea7"));
+                    new NaverMapSdk.NaverCloudPlatformClient("d4onuthfhd"));
+
+
         }
+
     }
-}
+
 
