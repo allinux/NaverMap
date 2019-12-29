@@ -4,12 +4,9 @@ package com.jinasoft.navermap;
 
 
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
@@ -18,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 
-import com.google.gson.JsonParser;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapFragment;
 
@@ -37,6 +33,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -46,8 +43,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<String> name;
     private ArrayList<String> phone_number;
     private ArrayList<String> address;
-    private ArrayList<String> longitude;
-    private ArrayList<String> latitude;
+    private ArrayList<Double> longitude;
+    private ArrayList<Double> latitude;
     private JSONArray jsonArray;
     private TextView textView;
 
@@ -62,8 +59,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             name = new ArrayList<>();
             phone_number = new ArrayList<>();
             address = new ArrayList<>();
-            longitude = new ArrayList<>();
-            latitude = new ArrayList<>();
+            List<Double> latitude = new ArrayList<>();
+            List<Double> longitude = new ArrayList<>();
 
 
 
@@ -84,17 +81,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         InsertData task = new InsertData();
         task.execute("http://58.230.203.182/Landpage/Realtor_List.php");
 
-  //      double LAT = Double.valueOf(latitude);
-//        double LNG = Double.parseDouble(String.valueOf(longitude));
 
-//        Double ls =126.9567534;
+        List<Double> LNG =longitude;
+        List<Double> LAT =latitude;
 
-        Double ls =126.9567534;
-        Double ly =37.3942906;
 
         Marker marker = new Marker();
-        marker.setPosition(new LatLng(ly, ls));
+        marker.setPosition(new LatLng(LAT,LNG));
         marker.setMap(naverMap);
+        naverMap.getCameraPosition();
 
     }
     class InsertData extends AsyncTask<String, Void, String> {
@@ -127,8 +122,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 String sNAME = subJsonObject.getString("name");
                 String sPHONE = subJsonObject.getString("cell_phone_number");
                 String sADD = subJsonObject.getString("address");
-                String sLAT = subJsonObject.getString("latitude");
-                String sLNG = subJsonObject.getString("longitude");
+                Double sLAT = subJsonObject.getDouble("latitude");
+                Double sLNG = subJsonObject.getDouble("longitude");
                 name.add(sNAME);
                 phone_number.add(sPHONE);
                 address.add(sADD);
@@ -142,7 +137,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 e.printStackTrace();
             }
 
-            textView.setText(latitude.toString()+"\n" + longitude.toString() );
+            textView.setText(latitude+"\n" + longitude);
 
 
 
