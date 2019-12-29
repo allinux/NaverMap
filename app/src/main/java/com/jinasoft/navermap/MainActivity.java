@@ -43,8 +43,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<String> name;
     private ArrayList<String> phone_number;
     private ArrayList<String> address;
-    private ArrayList<Double> longitude;
-    private ArrayList<Double> latitude;
+    //private ArrayList<Double> longitude;
+    //private ArrayList<Double> latitude;
+    private List<LatLng> locations = new ArrayList<>();
     private JSONArray jsonArray;
     private TextView textView;
 
@@ -59,8 +60,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             name = new ArrayList<>();
             phone_number = new ArrayList<>();
             address = new ArrayList<>();
-            List<Double>latitude = new ArrayList<>();
-            List<Double>longitude = new ArrayList<>();
+            //latitude = new ArrayList<>();
+            //longitude = new ArrayList<>();
 
 
 
@@ -85,11 +86,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 //        List<Double> LNG =longitude;
 //        List<Double> LAT =latitude;
 
-
-//        Marker marker = new Marker();
-//        marker.setPosition(new LatLng(LAT,LNG));
-//        marker.setMap(naverMap);
-//        naverMap.getCameraPosition();
+        for(LatLng loc: locations) {
+            Marker marker = new Marker();
+            marker.setPosition(loc);
+            marker.setMap(naverMap);
+        }
+        naverMap.getCameraPosition();
 
     }
     class InsertData extends AsyncTask<String, Void, String> {
@@ -128,8 +130,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 name.add(sNAME);
                 phone_number.add(sPHONE);
                 address.add(sADD);
-                latitude.add(sLAT);
-                longitude.add(sLNG);
+                //latitude.add(sLAT);
+                //longitude.add(sLNG);
+                locations.add(new LatLng(sLAT, sLNG));
 
 //                double LAT = Double.parseDouble(String.valueOf(latitude));
 //                double LNG = Double.parseDouble(String.valueOf(longitude));
