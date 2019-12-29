@@ -59,8 +59,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             name = new ArrayList<>();
             phone_number = new ArrayList<>();
             address = new ArrayList<>();
-            List<Double> latitude = new ArrayList<>();
-            List<Double> longitude = new ArrayList<>();
+            List<Double>latitude = new ArrayList<>();
+            List<Double>longitude = new ArrayList<>();
 
 
 
@@ -82,14 +82,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         task.execute("http://58.230.203.182/Landpage/Realtor_List.php");
 
 
-        List<Double> LNG =longitude;
-        List<Double> LAT =latitude;
+//        List<Double> LNG =longitude;
+//        List<Double> LAT =latitude;
 
 
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(LAT,LNG));
-        marker.setMap(naverMap);
-        naverMap.getCameraPosition();
+//        Marker marker = new Marker();
+//        marker.setPosition(new LatLng(LAT,LNG));
+//        marker.setMap(naverMap);
+//        naverMap.getCameraPosition();
 
     }
     class InsertData extends AsyncTask<String, Void, String> {
@@ -106,6 +106,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(String result){
             super.onPostExecute(result);
+
 
 
             try {
@@ -129,6 +130,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 address.add(sADD);
                 latitude.add(sLAT);
                 longitude.add(sLNG);
+
+//                double LAT = Double.parseDouble(String.valueOf(latitude));
+//                double LNG = Double.parseDouble(String.valueOf(longitude));
+
+//                NaverMap naverMap = null;
+//
+//                    Marker marker = new Marker();
+//                    marker.setPosition(new LatLng(LAT,LNG));
+//                    marker.setMap(naverMap);
 
 
 
